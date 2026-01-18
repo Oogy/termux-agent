@@ -1,2 +1,6 @@
 Host zinger
 	HostName 192.168.1.155
+
+Host rcode
+	HostName coder.weldon.ai
+	User coder
