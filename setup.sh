@@ -1,21 +1,9 @@
 #!/data/data/com.termux/files/usr/bin/bash
 set -e
 
-REPO_URL="https://github.com/Oogy/termux-agent.git"
-
 echo "=== Termux Agent Setup ==="
 
-# Determine script directory
-SCRIPT_DIR="$(cd "$(dirname "$0")" 2>/dev/null && pwd)" || SCRIPT_DIR=""
-
-# If running via curl-pipe or shortcuts/ssh_config not found, clone the repo
-if [ -z "$SCRIPT_DIR" ] || [ ! -d "$SCRIPT_DIR/shortcuts" ]; then
-    echo "[0/7] Cloning termux-agent repo..."
-    TEMP_DIR="${TMPDIR:-/data/data/com.termux/files/usr/tmp}/termux-agent-$$"
-    git clone --depth 1 "$REPO_URL" "$TEMP_DIR"
-    SCRIPT_DIR="$TEMP_DIR"
-    CLEANUP_TEMP=1
-fi
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Update packages
 echo "[1/7] Updating package lists..."
@@ -49,11 +37,6 @@ if [ -f ~/.ssh/config ]; then
 fi
 cp "$SCRIPT_DIR/ssh_config" ~/.ssh/config
 chmod 600 ~/.ssh/config
-
-# Cleanup temp directory if we cloned
-if [ "${CLEANUP_TEMP:-0}" = "1" ]; then
-    rm -rf "$TEMP_DIR"
-fi
 
 # Verify installation
 echo "[7/7] Verifying installation..."

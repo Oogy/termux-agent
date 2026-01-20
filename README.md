@@ -5,7 +5,7 @@ One-command setup for AI coding agents on Termux (Android).
 ## Quick Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Oogy/termux-agent/main/setup.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Oogy/termux-agent/main/install.sh | bash
 ```
 
 Or clone and run:
